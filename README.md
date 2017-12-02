@@ -5,15 +5,15 @@
 - change in income level by race
 
 ## races
-asian
-black
-hispanic
-mixed (2 or more)
-white
-	alaska native alaskan
-	american indian
-	native hawaiian and pacific islander
-some other race
+- asian
+- black
+- hispanic
+- mixed (2 or more)
+- white
+	- alaska native alaskan
+	- american indian
+	- native hawaiian and pacific islander
+- some other race
 
 ## years
 2000
