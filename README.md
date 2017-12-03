@@ -5,9 +5,9 @@
 - change in income level by race
 
 ## races
-- asian
-- black
-- hispanic
+- Asian
+- Black
+- Hispanic
 - mixed (2 or more)
 - white
 	- alaska native alaskan
