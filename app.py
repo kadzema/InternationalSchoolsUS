@@ -3,7 +3,7 @@ import json
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, inspect, func, desc, extract, select
+from sqlalchemy import create_engine, inspect, func, desc, extract, select, Table
 # from dateutil.relativedelta import relativedelta
         
 
@@ -15,60 +15,92 @@ app = Flask(__name__)
 # Flask Routes
 #################################################
 
-engine = create_engine("sqlite:///censusdata.sqlite", echo=False)
-Base = automap_base()
-Base.prepare(engine, reflect=True)
-
-session = Session(engine)
-
-
-aian = Base.classes.census_aian
-asian = Base.classes.census_asian
-
-totalDict = {}
-# aianTotals = session.query(aian.CountyName, aian.TotalPopulation, aian['$150000to$199999'], aian['$200000ormore'],aian.Year, aian.Race).all()
-aianTotals = session.query(aian.CountyName, aian.TotalPopulation,aian.Year, aian.Race).all()
-# asianTotals = session.query(asian.CountyName, asian.TotalPopulation, asian.Year, asian.Race).all()
-
-print(aianTotals)
-
+# this will hold all the data in the form we want
 censusDict = {}
-h2000_150 = 0
-h2005_150 = 0
-h2008_150 = 0
-h2010_150 = 0
-h2013_150 = 0
-h2016_150 = 0
 
-h2000_200 = 0
-h2005_200 = 0
-h2008_200 = 0
-h2010_200 = 0
-h2013_200 = 0
-h2016_200 = 0
+# a function to reset all the bucket values in case there is no data, the value will be 0
+def resetVars():
+    h2000_150 = 0
+    h2005_150 = 0
+    h2008_150 = 0
+    h2010_150 = 0
+    h2013_150 = 0
+    h2016_150 = 0
 
-h2000_total = 0
-h2005_total = 0
-h2008_total = 0
-h2010_total = 0
-h2013_total = 0
-h2016_total = 0
+    h2000_200 = 0
+    h2005_200 = 0
+    h2008_200 = 0
+    h2010_200 = 0
+    h2013_200 = 0
+    h2016_200 = 0
 
-h2000_hi = 0
-h2005_hi = 0
-h2008_hi = 0
-h2010_hi = 0
-h2013_hi = 0
-h2016_hi = 0
+    h2000_total = 0
+    h2005_total = 0
+    h2008_total = 0
+    h2010_total = 0
+    h2013_total = 0
+    h2016_total = 0
+
+    h2000_hi = 0
+    h2005_hi = 0
+    h2008_hi = 0
+    h2010_hi = 0
+    h2013_hi = 0
+    h2016_hi = 0
 
 # [('Los Angeles County, California', 14517, '2000', 'AIAN'), ('Los Angeles County, California', 16970, '2005', 'AIAN'), ('Los Angeles County, California', 17773, '2008', 'AIAN'), ('Los Angeles County, California', 14517, '2010', 'AIAN'), ('Los Angeles County, California', 20090, '2013', 'AIAN'), ('Los Angeles County, California', 20578, '2016', 'AIAN')]
 
-lastCounty = ""
 
-for aianTotal in aianTotals:
+# a function that takes the results from each table and adds them to the object to be returned
+def dataToObject(raceTotals,raceGroup):
+    lastCounty = ""
+    global h2000_150
+    global h2005_150
+    global h2008_150
+    global h2010_150
+    global h2013_150
+    global h2016_150
 
-    thisCounty = aianTotal[0]
-    if thisCounty == lastCounty and lastCounty != "":
+    global h2000_200
+    global h2005_200
+    global h2008_200
+    global h2010_200
+    global h2013_200
+    global h2016_200
+
+    global h2000_total
+    global h2005_total
+    global h2008_total
+    global h2010_total
+    global h2013_total
+    global h2016_total
+
+    global h2000_hi
+    global h2005_hi
+    global h2008_hi
+    global h2010_hi
+    global h2013_hi
+    global h2016_hi
+
+    resetVars()
+    for aianTotal in raceTotals:
+
+        thisCounty = aianTotal[0]
+
+        if thisCounty != lastCounty and lastCounty != "":
+            # print("new county - create the object for the previous county")
+            # write to the county list
+            aian150List = [h2000_150, h2005_150, h2008_150, h2010_150, h2013_150, h2016_150]
+            aian200List = [h2000_200, h2005_200, h2008_200, h2010_200, h2013_200, h2016_200]
+            aiantotalList = [h2000_total, h2005_total, h2008_total, h2010_total, h2013_total, h2016_total]
+            aianhiList = [h2000_hi, h2005_hi, h2008_hi, h2010_hi, h2013_hi, h2016_hi]
+            if lastCounty in censusDict:
+                censusDict[lastCounty].append([{raceGroup:[{"over150":aian150List},{"over200":aian200List},{"total":aiantotalList},{"hi":aianhiList}]}])
+            else:
+                censusDict[lastCounty] = [{raceGroup:[{"over150":aian150List},{"over200":aian200List},{"total":aiantotalList},{"hi":aianhiList}]}]
+            
+            
+            resetVars()
 
         if aianTotal[4] == '2000':
             h2000_150 =  aianTotal[2]
@@ -106,97 +138,86 @@ for aianTotal in aianTotals:
             h2016_total = aianTotal[1]
             h2016_hi = h2016_150 + h2016_200
 
+        lastCounty = thisCounty
+
+    # when done looping through, add the last county to the object
+    aian150List = [h2000_150, h2005_150, h2008_150, h2010_150, h2013_150, h2016_150]
+    aian200List = [h2000_200, h2005_200, h2008_200, h2010_200, h2013_200, h2016_200]
+    aiantotalList = [h2000_total, h2005_total, h2008_total, h2010_total, h2013_total, h2016_total]
+    aianhiList = [h2000_hi, h2005_hi, h2008_hi, h2010_hi, h2013_hi, h2016_hi]
+
+    if lastCounty in censusDict:
+        censusDict[lastCounty].append({raceGroup:[{"over150":aian150List},{"over200":aian200List},{"total":aiantotalList},{"hi":aianhiList}]})
     else:
-        # write to the county list
-        aian150List = [h2000_150, h2005_150, h2008_150, h2010_150, h2013_150, h2016_150]
-        aian200List = [h2000_200, h2005_200, h2008_200, h2010_200, h2013_200, h2016_200]
-        aiantotalList = [h2000_total, h2005_total, h2008_total, h2010_total, h2013_total, h2016_total]
-        aianhiList = [h2000_hi, h2005_hi, h2008_hi, h2010_hi, h2013_hi, h2016_hi]
-        censusDict[lastCounty] = {"AIAN",[{"over150",aian150List},{"over200",aian200List},{"total",aianTotalList},{"hi",aianhiList}]}
+        censusDict[lastCounty] = [{raceGroup:[{"over150":aian150List},{"over200":aian200List},{"total":aiantotalList},{"hi":aianhiList}]}]
 
-    lastCounty = thisCounty
 
-print(censusDict)
+# dataToObject(aianTotals,"AIAN")
+# dataToObject(blackTotals,"BLACK")
+# dataToObject(asianTotals,"ASIAN")
+# dataToObject(hispanicTotals,"HISPANIC")
+# dataToObject(mixedTotals,"MIXED")
+# dataToObject(otherTotals,"OTHER")
+# dataToObject(whitesTotals,"WHITES")
 
+# print(censusDict)
 
 
 @app.route("/")
 def welcome():
+    """The home page"""
+    return render_template("index.html")
+
+
+@app.route("/test")
+def test():
     """Return all census data"""
     # return render_template("index.html")
+    # return "test"
     return jsonify(censusDict)
 
+@app.route("/test2/<countyName>")
+def countySelect(countyName):
 
-
-
-@app.route("/totalPopulation/<countyID>")
-def populations(countyID):
-    print(countyID)
     engine = create_engine("sqlite:///censusdata.sqlite", echo=False)
     Base = automap_base()
     Base.prepare(engine, reflect=True)
-    
     session = Session(engine)
-    # raceList = [census_aian, census_asian, census_whites, census_black, census_hispanic, census_mixed, census_other]
-    
-    # x = census_aian
-
-    # table = Base.classes.x
-    # print(table)
-
-    # aian = Base.classes.census_aian
-    # , asian, whites, black, hispanic, mixed, other  = Base.classes.census_aian, Base.classes.census_asian, Base.classes.census_whites, Base.classes.census_black, Base.classes.census_hispanic, Base.classes.census_mixed, Base.classes.census_other
-
-# u1 = User(addresses=[Address(email="foo@bar.com")])
-
-    # a = aian(countyID=countyID)
-    # a2 = session.query(aian.CountyName, aian.TotalPopulation, aian.Year, aian.Race).filter_by(CountyID=countyID).all()
-    # print(a2)
-
-    # for race in raceList:
-    #     table = Base.classes.race
-    #     print(table)
-    #     totalDict = {}
-    #     raceTotals = session.query(table.CountyName, table.TotalPopulation, table.Year, table.Race).filter_by(CountyID=countyID).all()
-    #     popDict = {}
-
-    #     for pops in raceTotals:
-    #         popDict[pops[2]]=pops[1]
-
-    #     totalDict[race] = popDict
-
-    # return jsonify(totalDict)
-    # return "test"
-    
-    
 
     aian = Base.classes.census_aian
     asian = Base.classes.census_asian
+    black = Base.classes.census_black
+    hispanic = Base.classes.census_hispanic
+    mixed = Base.classes.census_mixed
+    other = Base.classes.census_other
+    whites = Base.classes.census_whites
 
-    totalDict = {}
-    aianTotals = session.query(aian.CountyName, aian.TotalPopulation, aian.Year, aian.Race).filter_by(CountyID=countyID).all()
-    asianTotals = session.query(asian.CountyName, asian.TotalPopulation, asian.Year, asian.Race).filter_by(CountyID=countyID).all()
-
-
-    
-    popDict = {}
-    
-    for aianTotal in aianTotals:
-        popDict[aianTotal[2]]=aianTotal[1]
-
-    print(popDict)
-    totalDict["AIAN"] = popDict
-
-    popDict = {}
-    
-    for asianTotal in asianTotals:
-        popDict[asianTotal[2]]=asianTotal[1]
-
-    print(popDict)
-    totalDict["ASIAN"] = popDict
+    # the queries
+    aianTotals = session.query(aian.CountyName, aian.TotalPopulation, aian.Over149999, aian.Over200000,aian.Year, aian.Race).filter_by(CountyName=countyName).order_by(aian.CountyName).all()
+    asianTotals = session.query(asian.CountyName, asian.TotalPopulation, asian.Over150000, asian.Over200000,asian.Year, asian.Race).filter_by(CountyName=countyName).filter_by(Race='Asian').order_by(asian.CountyName).all()
+    blackTotals = session.query(black.CountyName, black.TotalPopulation, black.Over150000, black.Over200000,black.Year, black.Race).filter_by(CountyName=countyName).order_by(black.CountyName).all()
+    hispanicTotals = session.query(hispanic.CountyName, hispanic.TotalPopulation, hispanic.Over150000, hispanic.Over200000,hispanic.Year, hispanic.Race).filter_by(CountyName=countyName).order_by(hispanic.CountyName).all()
+    mixedTotals = session.query(mixed.CountyName, mixed.TotalPopulation, mixed.Over150000, mixed.Over200000,mixed.Year, mixed.Race).filter_by(CountyName=countyName).order_by(mixed.CountyName).all()
+    otherTotals = session.query(other.CountyName, other.TotalPopulation, other.Over150000, other.Over200000,other.Year, other.Race).filter_by(CountyName=countyName).order_by(other.CountyName).all()
+    whitesTotals = session.query(whites.CountyName, whites.TotalPopulation, whites.Over150000, whites.Over200000,whites.Year, whites.Race).filter_by(CountyName=countyName).order_by(whites.CountyName).all()
 
 
-    return jsonify(totalDict)
+    # clear out the object so we don't keep adding to it everytime we refresh
+    censusDict.clear()
+
+    dataToObject(aianTotals,"AIAN")
+    dataToObject(blackTotals,"BLACK")
+    dataToObject(asianTotals,"ASIAN")
+    dataToObject(hispanicTotals,"HISPANIC")
+    dataToObject(mixedTotals,"MIXED")
+    dataToObject(otherTotals,"OTHER")
+    dataToObject(whitesTotals,"WHITES")
+
+    return jsonify(censusDict)
+    # return "test"
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
