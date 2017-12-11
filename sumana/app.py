@@ -17,6 +17,9 @@ from sqlalchemy.orm import Session
 from sqlalchemy import inspect
 from sqlalchemy.ext.automap import automap_base
 
+from sqlalchemy import create_engine, inspect, func, desc, extract, select, Table
+from collections import defaultdict
+
 # ===========================Database Connection========================
 
 # Create Database Connection
@@ -179,34 +182,69 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-
-@app.route('/selectcounty/<id>')
+@app.route('/selectcounty/<cname>')
 # select the county population
-def choosecounty(id):
+def choosecounty(cname):
 
-    county_data=merged_new.loc[merged_new["CountyID"]==id]
+    county_data=merged_new.loc[merged_new["CountyName"]== cname]
     finalresult=county_data.to_dict(orient='records')
     return jsonify(finalresult)
 
-@app.route('/highincomeover200000/<id>')
+@app.route('/highincomeover200000/<cname>')
 # select the county population
-def highincome(id):
+def highincome(cname):
 
-    high_data=high_income.loc[high_income["CountyID"]==id]
+    high_data=high_income.loc[high_income["CountyName"]== cname]
     high_value=high_data.to_dict(orient='records')
     return jsonify(high_value)
 
-@app.route('/highincomeover150000/<id>')
+@app.route('/highincomeover150000/<cname>')
 # select the county population
-def lowincome(id):
+def lowincome(cname):
 
-    low_data=low_income.loc[low_income["CountyID"]==id]
+    low_data=low_income.loc[low_income["CountyName"]== cname]
     low_value=low_data.to_dict(orient='records')
     return jsonify(low_value)
 
+@app.route("/origin")
+#publish the student origin
+def origin():
+    engine = create_engine("sqlite:///iie.sqlite", echo=False)
+    Base = automap_base()
+    Base.prepare(engine, reflect=True)
+    session = Session(engine)
+
+    origin = Base.classes.origin
+
+    originResult = session.query(origin.Origin, origin.studentcount, origin.year).all()
+
+    e = defaultdict(list)
+    for element in originResult:
+        e["origins"].append({'origin': str(element[0]), 'studentcount': element[1], 'year': element[2]})
+
+    return jsonify(e)
+
+
+@app.route("/univCounty")
+#publish the internation student placement
+def univCounty():
+    engine = create_engine("sqlite:///iie.sqlite", echo=False)
+    Base = automap_base()
+    Base.prepare(engine, reflect=True)
+    session = Session(engine)
+
+    univ = Base.classes.university_county
+
+    univResult = session.query(univ.PlaceofDestination, univ.City, univ.State, univ.Students, univ.Year, univ.County).all()
+
+    print(univResult)
+
+
+    e = defaultdict(list)
+    for element in univResult:
+        e["universities"].append({'university': str(element[0]), 'city': element[1], 'state': element[2], 'students': element[3], 'year': element[4], 'county':element[5]})
+    return jsonify(e)
+
 
 if __name__ == "__main__":
-
-    app.jinja_env.auto_reload = True
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run(debug = True, port = 5000)
+    app.run(debug=True)
