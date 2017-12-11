@@ -8,10 +8,21 @@ var margin = { top: 20, right: 40, bottom: 80, left: 100 };
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
+var colors = ['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d']
 
+var circleRadius = 5;
+var opacityPercentage = .8;
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
 var svg = d3
-.select(".population")
+.select(".totalpopulation")
+.append("svg")
+.attr("width", svgWidth)
+.attr("height", svgHeight)
+.append("g")
+.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var hisvg = d3
+.select(".hipopulation")
 .append("svg")
 .attr("width", svgWidth)
 .attr("height", svgHeight)
@@ -20,30 +31,63 @@ var svg = d3
 
 
 // do this inside the csv call so we can utilize the data to dynamically create one for each race?
+var aian = svg.append("g");
 var asian = svg.append("g");
-// // let's come back to this
-var total = svg.append("g");
-var black = svg.append("g")
+// var total = svg.append("g");
+var black = svg.append("g");
+var hispanic = svg.append("g");
+var mixed = svg.append("g");
+var other = svg.append("g");
+var whites = svg.append("g")
 
 //this will be selected from dropdown
-var countyID = 6037
+var countyName = "Los Angeles County, California"
 
-d3.json("/totalPopulation/"+countyID, function(err,data){
+d3.json("../test2/"+countyName, function(err,data){
   if (err) throw err;
-   console.log(data);
-  
-  // //this creates a list for all of the data points?
-  //   data.forEach(function(data) {
-  //     data.asian_population = +data.AsianOver200;
-  //     data.total_population = +data.TotalOver200;
-  //     data.black_population = +data.BlackOver200;
-  //     // data.population = +data.Over200;
-  //     // data.income_level = data.income_level;
-  //   });
 
-    // console.log("data.race_population",data.race_population);
-      // Create scale functions
-  var yLinearScale = d3.scaleLinear().range([height, 0]);
+   console.log(data);
+
+   xList = ['2000','2005', '2008', '2010', '2013', '2016']
+
+
+  //  don't think we should have to be using indexes!
+  // perhaps API should only return one list per race (like total or high income...)
+   aianData = data[countyName][0]["AIAN"][2]["total"]
+   blackData = data[countyName][1]["BLACK"][2]["total"]
+   asianData = data[countyName][2]["ASIAN"][2]["total"]
+   hispanicData = data[countyName][3]["HISPANIC"][2]["total"]
+   mixedData = data[countyName][4]["MIXED"][2]["total"]
+   otherData = data[countyName][5]["OTHER"][2]["total"]
+   whitesData = data[countyName][6]["WHITES"][2]["total"]
+
+   aianHIData = data[countyName][0]["AIAN"][3]["hi"]
+   blackHIData = data[countyName][1]["BLACK"][3]["hi"]
+   asianHIData = data[countyName][2]["ASIAN"][3]["hi"]
+   hispanicHIData = data[countyName][3]["HISPANIC"][3]["hi"]
+   mixedHIData = data[countyName][4]["MIXED"][3]["hi"]
+   otherHIData = data[countyName][5]["OTHER"][3]["hi"]
+   whitesHIData = data[countyName][6]["WHITES"][3]["hi"]
+
+  testThing = data[countyName]
+
+  console.log("kxatest: ",testThing)
+  for(i=0;i<testThing.length;i++){
+    console.log("looping",testThing[i])
+    // each one is a race
+
+  }
+
+   console.log("aianData",aianData)
+   console.log("blackData", blackData)
+   console.log("asianData",asianData)
+   console.log("hispanicData",hispanicData)
+   console.log("mixedData",mixedData)
+   console.log("otherData",otherData)
+   console.log("whitesData",whitesData)
+
+    // Create scale functions
+    var yLinearScale = d3.scaleLinear().range([height, 0]);
   
     var xLinearScale = d3.scaleLinear().range([0, width]);
   
@@ -56,31 +100,37 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
     var xMax;
     var yMin;
     var yMax;
-  
+
+    allData = aianData.concat(blackData).concat(asianData).concat(hispanicData).concat(mixedData).concat(otherData).concat(whitesData)
+    console.log("allData",allData);
+    yMin = d3.min(allData) * .8;
+    yMax = d3.max(allData);
+    console.log("yMin",yMin)
+    console.log("yMax",yMax)
     // This function identifies the minimum and maximum values for all of the data for the Y Axis
     // and assign them to yMin and yMax variables, which will define the axis domain
     // it will need to be run for all races
-    function findMinAndMax() {
-      yMin = d3.min(data, function(data) {
-        // return data[dataColumnY].filter(function(d){return d.income_bucket == "$10,000 to $14,999";}) //this will be total
-        // return +data[dataColumnY] * .8; //make it a little less so the first data point is not at the bottom
-        return (data.AsianOver200 < data.BlackOver200) ? (data.AsianOver200 * .8) : (data.BlackOver200 * .8);
-      });
+    // function findMinAndMax() {
+    //   yMin = d3.min(data, function(data) {
+    //     // return data[dataColumnY].filter(function(d){return d.income_bucket == "$10,000 to $14,999";}) //this will be total
+    //     // return +data[dataColumnY] * .8; //make it a little less so the first data point is not at the bottom
+    //     return (data.AsianOver200 < data.BlackOver200) ? (data.AsianOver200 * .8) : (data.BlackOver200 * .8);
+    //   });
   
-      yMax = d3.max(morePlayData, function(data) {
-        // return +data[dataColumnY] * 1.1;  // make it a little more so the last data point is not at the top
-        return (data.AsianOver200 < data.BlackOver200) ? (data.BlackOver200 * 1.1) : (data.AsianOver200 * 1.1);
-      });
-    }
+    //   yMax = d3.max(morePlayData, function(data) {
+    //     // return +data[dataColumnY] * 1.1;  // make it a little more so the last data point is not at the top
+    //     return (data.AsianOver200 < data.BlackOver200) ? (data.BlackOver200 * 1.1) : (data.AsianOver200 * 1.1);
+    //   });
+    // }
   
     // The default x-axis is 'year'
     // Another axis can be assigned to the variable during an onclick event.
     // This variable is key to the ability to change axis/data column
     var currentAxisLabelX = "Year";
-    var currentAxisLabelY = "AsianOver200";
+    var currentAxisLabelY = "Total";
   
     // Call findMinAndMax() with 'year' as default
-    findMinAndMax(); //if these calls weren't wrapped in a function, would we run the risk of not having values?
+    // findMinAndMax(); //if these calls weren't wrapped in a function, would we run the risk of not having values?
     // the function is not returning anything - it's only making calls
   
     // Set the domain of an axis to extend from the min to the max value of the data column
@@ -88,10 +138,29 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
     xMin = 1999;
     xMax = 2017;
     // yMax = 30000;
+    // yMin = 10000;
     xLinearScale.domain([xMin, xMax]);
+
+    // how to get the yMin and yMax?
+    // combine all list and get max and min?
+
     yLinearScale.domain([yMin, yMax]);
     // console.log("max y", yMax);
   
+    console.log("kxatest: ",testThing)
+    for(i=0;i<testThing.length;i++){
+      console.log(testThing[i])
+      // each one is a race
+      var value = Object.keys(testThing[i])
+      console.log("race?",value)
+       
+      // figure out how to do this dynamically
+      
+    }
+
+    console.log("kxa keys",Object.keys(testThing))
+
+
     // try this later
     // Initialize tooltip
     var toolTip = d3
@@ -101,9 +170,11 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
       .offset([80, -60])
       // The html() method allows us to mix JavaScript with HTML in the callback function
       .html(function(data) {   //how does this know it is looking at the csv data?
-        var race = data.race; //don't have this in this file
+        // var race = data.race; //don't have this in this file
+        
         // var numHits = +data.num_hits;
-        var population = +data[currentAxisLabelY];
+        // var population = +data[currentAxisLabelY];
+        var population = data;
         // var bandString;
         // // Tooltip text depends on which axis is active/has been clicked
         // if (currentAxisLabelX === "hair_length") {
@@ -112,7 +183,7 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
         // else {
         //   bandString = "Number of albums: ";
         // }
-        return "Population: " + population;
+        return "Population: " + population + "<br>Race: " + Object.keys(data);
         // return bandName +
         //   "<br>" +
         //   bandString +
@@ -123,48 +194,35 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
   
     // Create tooltip
     svg.call(toolTip);
-
-
-    // total
-    // .selectAll("circle")
-    // .data(morePlayData)
-    // .enter()
-    // .append("circle")
-    // .attr("cx", function(data, index) {
-    //   return xLinearScale(+data[currentAxisLabelX]);
-    // })
-    // .attr("cy", function(data, index) {
-    //   return yLinearScale(+data.AsianOver200);
-    // })
-    // // .attr("r", "5")
-    // .attr("r",function(data,index){
-    //   return data.total_population/1000;
-    // })
-    // .attr("fill", "#22AA88")
-    // .attr("opacity",.5)
   
     // // make circles for the race population but all in the lower left corner
-    asian
+    aian
       .selectAll("circle")
-      .data(morePlayData)
+      .data(aianData)
       .enter()
       .append("circle")
       .attr("cx", function(data, index) {
-        // return xLinearScale(+data[currentAxisLabelX]);
+        // return xLinearScale(index+2000);
         return 0;
       })
       .attr("cy", function(data, index) {
-        // return yLinearScale(data.AsianOver200);
+        // return yLinearScale(data);
         return 300;
       })
-      // .attr("r", "5")
-      .attr("r",function(data,index){
-        return data.asian_population/1000;
-      })
-      .attr("fill", "#E75480")
-      .attr("opacity",.3)
+      .attr("r", circleRadius)
+      // .attr("r",function(data,index){
+      //   // return data/1000;
+      //   return 10;
+      // })
+      // .attr("fill", "#E75480")
+      .attr("fill",colors[0])
+      .attr("opacity",opacityPercentage)
       // display tooltip on click
       .on("click", function(data) {
+        toolTip.show(data);
+      })
+      // display tooltip on click
+      .on("mouseon", function(data) {
         toolTip.show(data);
       })
       // hide tooltip on mouseout
@@ -173,24 +231,27 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
       });
 
       // now animate the circles
-      asian
+      aian
       .selectAll("circle")
       .transition()
       .duration(1000)
       .attr("cx", function(data, index) {
         // return index * svgWidth / 20;
-        return xLinearScale(+data[currentAxisLabelX]);
+        // return xLinearScale(+data[currentAxisLabelX]);
+        return xLinearScale(xList[index]);
       })
+      // .attr("cx", 2005)
       .attr("cy", function(data, index) {
         // return 600 - data * svgHeight / 80;
-        return yLinearScale(data.AsianOver200);
+        // return data;
+        return yLinearScale(data);
       });
 
 
          // // make circles for the race population but all in the lower left corner
     black
     .selectAll("circle")
-    .data(morePlayData)
+    .data(blackData)
     .enter()
     .append("circle")
     .attr("cx", function(data, index) {
@@ -201,20 +262,22 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
       // return yLinearScale(data.AsianOver200);
       return 300;
     })
-    // .attr("r", "5")
-    .attr("r",function(data,index){
-      return data.black_population/1000;
-    })
-    .attr("fill", "#000000")
-    .attr("opacity",.3)
-    // // display tooltip on click
-    // .on("click", function(data) {
-    //   toolTip.show(data);
+    .attr("r", circleRadius)
+    // .attr("r",function(data,index){
+    //   // return data/10000;
+    //   return 10;
     // })
-    // // hide tooltip on mouseout
-    // .on("mouseout", function(data, index) {
-    //   toolTip.hide(data);
-    // });
+    // .attr("fill", "#000000")
+    .attr("fill",colors[1])
+    .attr("opacity",opacityPercentage)
+    // display tooltip on click
+    .on("click", function(data) {
+      toolTip.show(data);
+    })
+    // hide tooltip on mouseout
+    .on("mouseout", function(data, index) {
+      toolTip.hide(data);
+    });
 
     // now animate the circles
     black
@@ -223,15 +286,215 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
     .duration(1000)
     .attr("cx", function(data, index) {
       // return index * svgWidth / 20;
-      return xLinearScale(+data[currentAxisLabelX]);
+      return xLinearScale(+xList[index]);
     })
     .attr("cy", function(data, index) {
       // return 600 - data * svgHeight / 80;
-      return yLinearScale(data.BlackOver200);
+      return yLinearScale(data);
     }); 
+
+
+    asian
+    .selectAll("circle")
+    .data(asianData)
+    .enter()
+    .append("circle")
+    .attr("cx", function(data, index) {
+      return 0;
+    })
+    .attr("cy", function(data, index) {
+      return 300;
+    })
+    .attr("r", circleRadius)
+    // .attr("r",function(data,index){
+    //   return 10;
+    // })
+    // .attr("fill", "#00FF00")
+    .attr("fill", colors[2])
+    .attr("opacity",opacityPercentage)
+    // display tooltip on click
+    .on("click", function(data) {
+      toolTip.show(data);
+    })
+    // hide tooltip on mouseout
+    .on("mouseout", function(data, index) {
+      toolTip.hide(data);
+    });
+
+    // now animate the circles
+    asian
+    .selectAll("circle")
+    .transition()
+    .duration(1000)
+    .attr("cx", function(data, index) {
+      return xLinearScale(+xList[index]);
+    })
+    .attr("cy", function(data, index) {
+      return yLinearScale(data);
+    });
+
+    hispanic
+    .selectAll("circle")
+    .data(hispanicData)
+    .enter()
+    .append("circle")
+    .attr("cx", function(data, index) {
+      return 0;
+    })
+    .attr("cy", function(data, index) {
+      return 300;
+    })
+    .attr("r", circleRadius)
+    // .attr("r",function(data,index){
+    //   return 10;
+    // })
+    // .attr("fill", "#0000FF")
+    .attr("fill", colors[3])
+    .attr("opacity",opacityPercentage)
+    // display tooltip on click
+    .on("click", function(data) {
+      toolTip.show(data);
+    })
+    // hide tooltip on mouseout
+    .on("mouseout", function(data, index) {
+      toolTip.hide(data);
+    });
+
+    // now animate the circles
+    hispanic
+    .selectAll("circle")
+    .transition()
+    .duration(1000)
+    .attr("cx", function(data, index) {
+      return xLinearScale(+xList[index]);
+    })
+    .attr("cy", function(data, index) {
+      return yLinearScale(data);
+    });
+
+    mixed
+    .selectAll("circle")
+    .data(mixedData)
+    .enter()
+    .append("circle")
+    .attr("cx", function(data, index) {
+      return 0;
+    })
+    .attr("cy", function(data, index) {
+      return 300;
+    })
+    .attr("r", circleRadius)
+    // .attr("r",function(data,index){
+    //   return 10;
+    // })
+    // .attr("fill", "#FF7700")
+    .attr("fill",colors[4])
+    .attr("opacity",opacityPercentage)
+    // display tooltip on click
+    .on("click", function(data) {
+      toolTip.show(data);
+    })
+    // hide tooltip on mouseout
+    .on("mouseout", function(data, index) {
+      toolTip.hide(data);
+    });
+
+    // now animate the circles
+    mixed
+    .selectAll("circle")
+    .transition()
+    .duration(1000)
+    .attr("cx", function(data, index) {
+      return xLinearScale(+xList[index]);
+    })
+    .attr("cy", function(data, index) {
+      return yLinearScale(data);
+    });
+
+  
+    other
+    .selectAll("circle")
+    .data(otherData)
+    .enter()
+    .append("circle")
+    .attr("cx", function(data, index) {
+      return 0;
+    })
+    .attr("cy", function(data, index) {
+      return 300;
+    })
+    .attr("r", circleRadius)
+    // .attr("r",function(data,index){
+    //   return 10;
+    // })
+    // .attr("fill", "#0077FF")
+    .attr("fill", colors[5])
+    .attr("opacity",opacityPercentage)
+    // display tooltip on click
+    .on("click", function(data) {
+      toolTip.show(data);
+    })
+    // hide tooltip on mouseout
+    .on("mouseout", function(data, index) {
+      toolTip.hide(data);
+    });
+
+    // now animate the circles
+    other
+    .selectAll("circle")
+    .transition()
+    .duration(1000)
+    .attr("cx", function(data, index) {
+      return xLinearScale(+xList[index]);
+    })
+    .attr("cy", function(data, index) {
+      return yLinearScale(data);
+    });
+
+    whites
+    .selectAll("circle")
+    .data(whitesData)
+    .enter()
+    .append("circle")
+    .attr("cx", function(data, index) {
+      return 0;
+    })
+    .attr("cy", function(data, index) {
+      return 300;
+    })
+    .attr("r", circleRadius)
+    // .attr("r",function(data,index){
+    //   return 10;
+    // })
+    // .attr("fill", "#0077FF")
+    .attr("fill", colors[6])
+    .attr("opacity",opacityPercentage)
+    // display tooltip on click
+    .on("click", function(data) {
+      toolTip.show(data);
+    })
+    // hide tooltip on mouseout
+    .on("mouseout", function(data, index) {
+      toolTip.hide(data);
+    });
+
+    // now animate the circles
+    whites
+    .selectAll("circle")
+    .transition()
+    .duration(1000)
+    .attr("cx", function(data, index) {
+      return xLinearScale(+xList[index]);
+    })
+    .attr("cy", function(data, index) {
+      return yLinearScale(data);
+    });
+
+
+
   
     // Append an SVG group for the x-axis, then display the x-axis
-    asian
+    aian
       .append("g")
       .attr("transform", "translate(0," + height + ")")
       // The class name assigned here will be used for transition effects
@@ -239,10 +502,10 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
       .call(bottomAxis);
   
     // Append a group for y-axis, then display it
-    asian.append("g").call(leftAxis);
+    aian.append("g").call(leftAxis);
   
     // Append y-axis label
-    asian
+    aian
       .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left + 40)
@@ -253,7 +516,7 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
       .text("Population");
   
     // Append x-axis labels
-    asian
+    aian
       .append("text")
       .attr(
         "transform",
@@ -265,187 +528,3 @@ d3.json("/totalPopulation/"+countyID, function(err,data){
       .text("Year");
 
 });
-
-
-// // ----------------------------------- black --------------------------------------------------
-
-// var svg2 = d3
-// .select(".black")
-// .append("svg")
-// .attr("width", svgWidth)
-// .attr("height", svgHeight)
-// .append("g")
-// .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// var black = svg2.append("g");
-// var total2 = svg2.append("g");
-
-// d3.csv("All200.csv", function(err,morePlayData){
-//   if (err) throw err;
-  
-//     //this creates a list for all of the data points?
-//     morePlayData.forEach(function(data) {
-//       data.race_population = +data.BlackOver200;
-//       data.total_population = +data.TotalOver200;
-//       // data.population = +data.Over200;
-//       // data.income_level = data.income_level;
-//     });
-
-//       // Create scale functions
-//   var yLinearScale = d3.scaleLinear().range([height, 0]);
-  
-//     var xLinearScale = d3.scaleLinear().range([0, width]);
-  
-//     // Create axis functions
-//     var bottomAxis = d3.axisBottom(xLinearScale);
-//     var leftAxis = d3.axisLeft(yLinearScale);
-  
-//     // These variables store the minimum and maximum values in a column in data.csv
-//     var xMin;
-//     var xMax;
-//     var yMin;
-//     var yMax;
-  
-//     // This function identifies the minimum and maximum values in a column in playData.csv
-//     // and assign them to xMin and xMax variables, which will define the axis domain
-//     // it also obtains the max y value
-//     function findMinAndMax(dataColumnY) {
-//       yMin = d3.min(morePlayData, function(data) {
-//         return +data[dataColumnY] * .8;
-//       });
-  
-//       yMax = d3.max(morePlayData, function(data) {
-//         return +data[dataColumnY] * 1.1;
-//       });
-//     }
-  
-//     // The default x-axis is 'year'
-//     // Another axis can be assigned to the variable during an onclick event.
-//     // This variable is key to the ability to change axis/data column
-//     var currentAxisLabelX = "Year";
-//     var currentAxisLabelY = "BlackOver200";
-  
-//     // Call findMinAndMax() with 'year' as default
-//     findMinAndMax(currentAxisLabelY); //if these calls weren't wrapped in a function, would we run the risk of not having values?
-//     // the function is not returning anything - it's only making calls
-  
-//     // Set the domain of an axis to extend from the min to the max value of the data column
-//     // let's hard code min and max x values to match years
-//     xMin = 1999;
-//     xMax = 2017;
-//     // yMax = 30000;
-//     xLinearScale.domain([xMin, xMax]);
-//     yLinearScale.domain([yMin, yMax]);
-//     // console.log("max y", yMax);
-  
-//     // // try this later
-//     // // Initialize tooltip
-//     // var toolTip = d3
-//     //   .tip()
-//     //   .attr("class", "tooltip")
-//     //   // Define position
-//     //   .offset([80, -60])
-//     //   // The html() method allows us to mix JavaScript with HTML in the callback function
-//     //   .html(function(data) {   //how does this know it is looking at the csv data?
-//     //     var bandName = data.rockband;
-//     //     var numHits = +data.num_hits;
-//     //     var bandInfo = +data[currentAxisLabelX];
-//     //     var bandString;
-//     //     // Tooltip text depends on which axis is active/has been clicked
-//     //     if (currentAxisLabelX === "hair_length") {
-//     //       bandString = "Hair length: ";
-//     //     }
-//     //     else {
-//     //       bandString = "Number of albums: ";
-//     //     }
-//     //     return bandName +
-//     //       "<br>" +
-//     //       bandString +
-//     //       bandInfo +
-//     //       "<br> Hits: " +
-//     //       numHits;
-//     //   });
-  
-//     // // Create tooltip
-//     // chart.call(toolTip);
-
-//     // make circles for the total population
-//     total2
-//     .selectAll("circle")
-//     .data(morePlayData)
-//     .enter()
-//     .append("circle")
-//     .attr("cx", function(data, index) {
-//       return xLinearScale(+data[currentAxisLabelX]);
-//     })
-//     .attr("cy", function(data, index) {
-//       return yLinearScale(data.BlackOver200);
-//     })
-//     // .attr("r", "5")
-//     .attr("r",function(data,index){
-//       return data.total_population/1000;
-//     })
-//     .attr("fill", "#22AA88")
-//     .attr("opacity",.5)
-  
-//     // make circles for the race population
-//     black
-//       .selectAll("circle")
-//       .data(morePlayData)
-//       .enter()
-//       .append("circle")
-//       .attr("cx", function(data, index) {
-//         return xLinearScale(+data[currentAxisLabelX]);
-//       })
-//       .attr("cy", function(data, index) {
-//         return yLinearScale(data.BlackOver200);
-//       })
-//       // .attr("r", "5")
-//       .attr("r",function(data,index){
-//         return data.race_population/1100;
-//       })
-//       .attr("fill", "#E75480")
-//       // // display tooltip on click
-//       // .on("click", function(data) {
-//       //   toolTip.show(data);
-//       // })
-//       // // hide tooltip on mouseout
-//       // .on("mouseout", function(data, index) {
-//       //   toolTip.hide(data);
-//       // });
-  
-//     // Append an SVG group for the x-axis, then display the x-axis
-//     black
-//       .append("g")
-//       .attr("transform", "translate(0," + height + ")")
-//       // The class name assigned here will be used for transition effects
-//       .attr("class", "x-axis")
-//       .call(bottomAxis);
-  
-//     // Append a group for y-axis, then display it
-//     black.append("g").call(leftAxis);
-  
-//     // Append y-axis label
-//     black
-//       .append("text")
-//       .attr("transform", "rotate(-90)")
-//       .attr("y", 0 - margin.left + 40)
-//       .attr("x", 0 - height / 2)
-//       .attr("dy", "1em")
-//       .attr("class", "axis-text")
-//       .attr("data-axis-name", "population")
-//       .text("Black Population Income Over $200k");
-  
-//     // Append x-axis labels
-//     black
-//       .append("text")
-//       .attr(
-//         "transform",
-//         "translate(" + width / 2 + " ," + (height + margin.top + 20) + ")"
-//       )
-//       // This axis label is active by default
-//       .attr("class", "axis-text active")
-//       .attr("data-axis-name", "year")
-//       .text("Year");
-
-// });
