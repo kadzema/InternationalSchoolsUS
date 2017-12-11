@@ -4,6 +4,7 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, inspect, func, desc, extract, select, Table
+from collections import defaultdict
 # from dateutil.relativedelta import relativedelta
         
 
@@ -216,6 +217,44 @@ def countySelect(countyName):
     return jsonify(censusDict)
     # return "test"
 
+@app.route("/origin")
+def origin():
+    engine = create_engine("sqlite:///iie.sqlite", echo=False)
+    Base = automap_base()
+    Base.prepare(engine, reflect=True)
+    session = Session(engine)
+
+    origin = Base.classes.origin
+
+    originResult = session.query(origin.Origin, origin.studentcount, origin.year).all()
+
+    e = defaultdict(list)
+    for element in originResult:
+        e["origins"].append({'origin': str(element[0]), 'studentcount': element[1], 'year': element[2]})
+
+    return jsonify(e)
+
+
+@app.route("/univCounty")
+def univCounty():
+    print("yes")
+    engine = create_engine("sqlite:///iie.sqlite", echo=False)
+    Base = automap_base()
+    Base.prepare(engine, reflect=True)
+    session = Session(engine)
+
+    univ = Base.classes.university_county
+
+    univResult = session.query(univ.PlaceofDestination, univ.City, univ.State, univ.Students, univ.Year, univ.County).all()
+
+    print(univResult)
+
+
+    e = defaultdict(list)
+    for element in univResult:
+        e["universities"].append({'university': str(element[0]), 'city': element[1], 'state': element[2], 'students': element[3], 'year': element[4], 'county':element[5]})
+
+    return jsonify(e)
 
 
 
