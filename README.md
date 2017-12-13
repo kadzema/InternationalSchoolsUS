@@ -5,9 +5,9 @@
 - change in income level by race
 
 ## races
-- asian
-- black
-- hispanic
+- Asian
+- Black
+- Hispanic
 - mixed (2 or more)
 - white
 	- alaska native alaskan
@@ -19,6 +19,9 @@
 2000
 2005
 2008
+2010
+2013
+2016
 
 ## to do 
 - census data availability - craig
