@@ -17,7 +17,7 @@ app = Flask(__name__)
 #################################################
 @app.route("/")
 def welcome():
-    return "InternationalUniversities"        
+    return "MyChart"        
 
 
 if __name__ == "__main__":
