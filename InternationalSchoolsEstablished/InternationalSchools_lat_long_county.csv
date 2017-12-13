@@ -1,0 +1,75 @@
+City,Name,State,EstablishedYear,Lat,Lng,County
+ Scottsdale,International School of Arizona,Arizona,1997,33.4941704,-111.9260519,Maricopa County
+ Irvine,Alliant International University,California,2001,33.6845673,-117.8265049,Orange County
+ Los Angeles,American University Preparatory School,California,2013,34.0522342,-118.2436849,Los Angeles County
+ San Francisco,French American International School,California,1962,37.7749295,-122.4194155,San Francisco County
+ Palos Verdes Estates,International Bilingual School,California,1979,33.8005714,-118.3900737,Los Angeles County
+San Francisco,International High School of San Francisco,California,1962,37.7749295,-122.4194155,San Francisco County
+ San Francisco,International School of the Peninsula,California,1979,37.7749295,-122.4194155,San Francisco County
+ San Francisco,La Scuola International School,California,2002,37.7749295,-122.4194155,San Francisco County
+LosAngels,Lycée Français de Los Angeles,California,1964,34.0522342,-118.2436849,Los Angeles County
+ Burbank,Lycée International de Los Angeles,California,1978,34.1808392,-118.3089661,Los Angeles County
+Oakland,Oakland International High School,California,2007,37.8043637,-122.2711137,Alameda County
+Denver,International School of Denver,Colorado,1858,39.7392358,-104.990251,Denver County
+ Riverside,The International School at Dundee,Connecticut,2000,41.0337666,-73.5784843,Fairfield County
+ Greenwich,The Japanese School of New York,Connecticut,1975,41.0262417,-73.6281964,Fairfield County
+ Greenwich,Whitby School,Connecticut,1958,41.0262417,-73.6281964,Fairfield County
+Georgetown,British School of Washington,District of Columbia,1998,38.9097057,-77.0653565,Arlington County
+ D.C. (DSW),"German School Washington, D.C. (DSW)",District of Columbia,1961,38.92894,-77.034382,Washington
+"Washington,DC",Washington International School,District of Columbia,1966,38.9071923,-77.0368707,District of Columbia
+Largo,Schiller International University,Florida,1964,27.9094665,-82.7873244,Pinellas County
+Lighthouse Point,North Broward Preparatory School,Florida,1957,26.275636,-80.0872654,Broward County
+Lake Butler,Windermere Preparatory School,Florida,2000,30.0227391,-82.3395574,Union County
+Atlanta,Atlanta International School,Georgia,1984,33.7489954,-84.3879824,Fulton County
+ Peachtree Corners,Seigakuin Atlanta International School,Georgia,1990,33.969864,-84.2212938,Gwinnett County
+ Honolulu,Varsity International School,Hawaii,NAN,21.3069444,-157.8583333,Honolulu County
+Chicago,British International School of Chicago Lincoln Park,Illinois,2001,41.8781136,-87.6297982,Cook County
+ South Loop,"British International School of Chicago, South Loop",Illinois,2001,41.8565453,-87.6271838,Cook County
+ Arlington Heights,Chicago Futabakai Japanese School,Illinois,1966,42.0883603,-87.9806265,Cook County
+Chicago,Lycée Français de Chicago,Illinois,1995,41.8781136,-87.6297982,Cook County
+ Indianapolis,International School of Indiana,Indiana,1994,39.768403,-86.158068,Marion County
+ Bethesda,Lycée Rochambeau,Maryland,1955,38.984652,-77.0947092,Montgomery County
+ Fort Washington,Maryland International Day School,Maryland,2001,38.7073379,-77.0230313,Prince George's County
+Boston,British International School of Boston,Massachusetts,2000,42.3600825,-71.0588801,Suffolk County
+ Cambridge,International School of Boston,Massachusetts,1962,42.3736158,-71.1097335,Middlesex County
+ Boston,Snowden International School,Massachusetts,1983,42.3600825,-71.0588801,Suffolk County
+ Bloomfield Hills,International Academy,Michigan,1996,42.583645,-83.2454883,Oakland County
+ Clinton Township,International Academy of Macomb,Michigan,2008,42.5868882,-82.9195514,Macomb County
+ St Paul,Saint Paul Preparatory School,Minnesota,2003,44.9537029,-93.0899578,Ramsey County
+ Eden Prairie,The International School of Minnesota,Minnesota,1985,44.8546856,-93.470786,Hennepin County
+ Henderson,Henderson International School,Nevada,1941,36.0395247,-114.9817213,Clark County
+ Oakland,The New Jersey Japanese School,New Jersey,1992,41.0131529,-74.2643143,Bergen County
+ Princeton,Princeton International School of Mathematics and Science,New Jersey,2013,40.3572976,-74.6672226,Mercer County
+ Morristown,French Saturday School,New Jersey,NAN,40.7967667,-74.4815438,Morris County
+ Montezuma,Armand Hammer United World College of the American West,New Mexico,1982,35.6521842,-105.2766154,San Miguel County
+ New York City,Avenues: The World School,New York,2011,40.7127753,-74.0059728,New York
+New York City,British International School of New York,New York,2006,40.7127753,-74.0059728,New York
+ New York City,College of Staten Island High School for International Studies,New York,2005,40.7127753,-74.0059728,New York
+ New York City,Dwight School,New York,1872,40.7127753,-74.0059728,New York
+New York City,EF International Academy,New York,2004,40.7127753,-74.0059728,New York
+ New York City,The Flushing International High School,New York,2004,40.7127753,-74.0059728,New York
+ Westchester County,French-American School of New York,New York,1980,41.1220194,-73.7948516,Westchester County
+ White Plains,German International School New York,New York,1980,41.0339862,-73.7629097,Westchester County
+ New York City,The International High School,New York,1985,40.7127753,-74.0059728,New York
+ Purchase,Keio Academy of New York,New York,1990,41.0400135,-73.7144477,Westchester County
+ New York City,Lycée Français de New York,New York,1935,40.7127753,-74.0059728,New York
+ New York City,Nord Anglia International School New York,New York,2011,40.7127753,-74.0059728,New York
+ New York City,United Nations International School,New York,1947,40.7127753,-74.0059728,New York
+ Greensboro,American Hebrew Academy,North Carolina,2001,36.0726354,-79.7919754,Guilford County
+Charlotte,British American School of Charlotte,North Carolina,2004,35.2270869,-80.8431267,Mecklenburg County
+ Portland,French American International School,Oregon,1979,45.5230622,-122.6764815,Multnomah County
+Aloha,International School of Beaverton,Oregon,2006,45.4942838,-122.8670454,Washington County
+Charlotte,The British International School of Charlotte,South Carolina,2004,35.2270869,-80.8431267,Mecklenburg County
+ Wade Hampton,French Bilingual School of South Carolina,South Carolina,1979,34.9037282,-82.3331733,Greenville County
+ Sweetwater,Tennessee Meiji Gakuin High School,Tennessee,1989,35.6014636,-84.4610394,Monroe County
+Austin,Austin International School,Texas,2001,30.267153,-97.7430608,Travis County
+ Houston,Awty International School,Texas,1956,29.7604267,-95.3698028,Harris County
+Houston,British International School of Houston,Texas,2000,29.7604267,-95.3698028,Harris County
+Dallas,Dallas International School,Texas,1993,32.7766642,-96.7969879,Dallas County
+ Katy,Faith West Academy,Texas,1982,29.7857853,-95.8243956,Fort Bend County
+Austin,International School of Texas-Austin,Texas,2013,30.267153,-97.7430608,Travis County
+ Houston,The Village School,Texas,1966,29.7604267,-95.3698028,Harris County
+ Bellevue,French Immersion School of Washington,Washington,1999,47.6101497,-122.2015159,King County
+ Kirkland,International Community School,Washington,1997,47.6768927,-122.2059833,King County
+ Bellevue,International School,Washington,1991,47.6101497,-122.2015159,King County
+ Bluefield,Bluefield International Academy,West Virginia,2007,37.2698395,-81.2223195,Mercer County

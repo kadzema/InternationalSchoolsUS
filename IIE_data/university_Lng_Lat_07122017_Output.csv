@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ï»¿,Place of Destination,City,State,Students,Year,Lat,Lng
 0,New York University,New York,NY,"17,326",2016,40.7127753,-74.0059728
 1,University of Southern California,Los Angeles,CA,"14,327",2016,34.0522342,-118.2436849
@@ -303,3 +304,156 @@
 148,Texas A&M University,College Station,TX,"5,149",2013,30.627977,-96.3344068
 149,Carnegie Mellon University,Pittsburgh,PA,"4,744",2013,40.4406248,-79.9958864
 >>>>>>> 9ca7294936d9da28b5681a9738acd9bbbbd251e1
+=======
+	Place of Destination	City	State	Students	Year	Lat	Lng
+0	New York University	New York	NY	"17,326"	2016	40.7127753	-74.0059728
+1	University of Southern California	Los Angeles	CA	"14,327"	2016	34.0522342	-118.2436849
+2	Columbia University	New York	NY	"14,096"	2016	40.7127753	-74.0059728
+3	Northeastern University - Boston	Boston	MA	"13,201"	2016	42.3600825	-71.0588801
+4	Arizona State University - Tempe	Tempe	AZ	"13,164"	2016	33.4255104	-111.9400054
+5	University of Illinois - Urbana-Champaign	Champaign	IL	"12,454"	2016	40.1164204	-88.2433829
+6	University of California - Los Angeles	Los Angeles	CA	"12,199"	2016	34.0522342	-118.2436849
+7	Purdue University - West Lafayette	West Lafayette	IN	"11,288"	2016	40.4258686	-86.9080655
+8	University of Texas - Dallas	Richardson	TX	"9,305"	2016	32.9483335	-96.7298519
+9	Pennsylvania State University - University Park	University Park	PA	"9,134"	2016	32.8550377	-96.797592
+10	University of California - San Diego	La Jolla	CA	"9,065"	2016	32.8328112	-117.2712717
+11	Boston University	Boston	MA	"8,992"	2016	42.3600825	-71.0588801
+12	University of Michigan - Ann Arbor	Ann Arbor	MI	"8,163"	2016	42.2808256	-83.7430378
+13	University of Washington	Seattle	WA	"8,019"	2016	47.6062095	-122.3320708
+14	University of California - Berkeley	Berkeley	CA	"8,000"	2016	37.8718992	-122.2585399
+15	Michigan State University	East Lansing	MI	"7,779"	2016	42.7369792	-84.4838654
+16	Ohio State University - Columbus	Columbus	OH	"7,684"	2016	39.9611755	-82.9987942
+17	Carnegie Mellon University	Pittsburgh	PA	"7,653"	2016	40.4406248	-79.9958864
+18	Indiana University - Bloomington	Bloomington	IN	"7,502"	2016	39.165325	-86.5263857
+19	University of Texas - Arlington	Arlington	TX	"7,277"	2016	38.8816208	-77.0909809
+20	SUNY University at Buffalo	Buffalo	NY	"7,252"	2016	42.8864468	-78.8783689
+21	University of Minnesota - Twin Cities	Minneapolis	MN	"7,197"	2016	44.977753	-93.2650108
+22	University of Florida	Gainesville	FL	"7,107"	2016	29.6516344	-82.3248262
+23	Texas A&M University - College Station	College Station	TX	"6,960"	2016	30.627977	-96.3344068
+24	University of California - Irvine	Irvine	CA	"6,792"	2016	33.6845673	-117.8265049
+25	New York University	New York	NY	"5,399"	2000	40.7127753	-74.0059728
+26	University of Southern California	Los Angeles	CA	"5,321"	2000	34.0522342	-118.2436849
+27	Columbia University	New York	NY	"4,837"	2000	40.7127753	-74.0059728
+28	Purdue University Main Campus	West Lafayette	IN	"4,469"	2000	40.4258686	-86.9080655
+29	Boston University	Boston	MA	"4,443"	2000	42.3600825	-71.0588801
+30	University of Texas at Austin	Austin	TX	"4,320"	2000	30.267153	-97.7430608
+31	The Ohio State University Main Campus	Columbus	OH	"4,035"	2000	39.9611755	-82.9987942
+32	University of Michigan - Ann Arbor	Ann Arbor	MI	"4,004"	2000	42.2808256	-83.7430378
+33	University of Wisconsin - Madison	Madison	WI	"3,938"	2000	43.0730517	-89.4012302
+34	Northern Virginia Community College	Annandale	VA	"3,877"	2000	38.8303905	-77.1963703
+35	University of Illinois Urbana – Champaign	Champaign	IL	"3,798"	2000	40.1164204	-88.2433829
+36	Florida International University	Miami	FL	"3,603"	2000	25.7616798	-80.1917902
+37	Texas A&M University	College Station	TX	"3,587"	2000	30.627977	-96.3344068
+38	University of Pennsylvania	Philadelphia	PA	"3,487"	2000	39.9525839	-75.1652215
+39	University of Maryland College Park	College Park	MD	"3,480"	2000	38.9896967	-76.93776
+40	Harvard University	Cambridge	MA	"3,377"	2000	52.205337	0.121817
+41	University of Minnesota – Twin Cities	Minneapolis	MN	"3,356"	2000	44.977753	-93.2650108
+42	Penn State University Park	University Park	PA	"3,288"	2000	32.8550377	-96.797592
+43	Indiana University at Bloomington	Bloomington	IN	"3,284"	2000	39.165325	-86.5263857
+44	Montgomery College	Rockville	MD	"3,264"	2000	39.0839973	-77.1527578
+45	Houston Community College System	Houston	TX	"3,201"	2000	29.7604267	-95.3698028
+46	CUNY Bernard M. Baruch College	New York	NY	"3,135"	2000	40.7127753	-74.0059728
+47	University of Florida	Gainesville	FL	"3,039"	2000	29.6516344	-82.3248262
+48	Cornell University	Ithaca	NY	"3,024"	2000	42.4439614	-76.5018807
+49	University of Houston	Houston	TX	"3,010"	2000	29.7604267	-95.3698028
+50	University of Southern California California	Los Angeles	CA	"6,881"	2005	34.0522342	-118.2436849
+51	Columbia University	New York	NY	"5,575"	2005	40.7127753	-74.0059728
+52	"Purdue University, Main Campus"	West Lafayette	IN	"5,540"	2005	40.4258686	-86.9080655
+53	New York University	New York	NY	"5,502"	2005	40.7127753	-74.0059728
+54	University of Texas at Austin	Austin	TX	"5,395"	2005	30.267153	-97.7430608
+55	University of Illinois at Urbana-Champaign	Champaign	IL	"4,904"	2005	40.1164204	-88.2433829
+56	University of Michigan - Ann Arbor	Ann Arbor	MI	"4,649"	2005	42.2808256	-83.7430378
+57	Boston University	Boston	MA	"4,542"	2005	42.3600825	-71.0588801
+58	"The Ohio State University, Main Campus"	Columbus	OH	"4,476"	2005	39.9611755	-82.9987942
+59	SUNY - University at Buffalo	Buffalo	NY	"4,072"	2005	42.8864468	-78.8783689
+60	University of California - Los Angeles	Los Angeles	CA	"3,979"	2005	34.0522342	-118.2436849
+61	University of Florida	Gainesville	FL	"3,749"	2005	29.6516344	-82.3248262
+62	Cornell University	Ithaca	NY	"3,697"	2005	42.4439614	-76.5018807
+63	University of Pennsylvania	Philadelphia	PA	"3,689"	2005	39.9525839	-75.1652215
+64	Harvard University	Cambridge	MA	"3,669"	2005	52.205337	0.121817
+65	Texas A&M University	College Station	TX	"3,589"	2005	30.627977	-96.3344068
+66	Indiana University at Bloomington	Bloomington	IN	"3,540"	2005	39.165325	-86.5263857
+67	University of Maryland College Park	College Park	MD	"3,476"	2005	38.9896967	-76.93776
+68	University of Houston	Houston	TX	"3,413"	2005	29.7604267	-95.3698028
+69	University of Minnesota - Twin Cities	Minneapolis	MN	"3,384"	2005	44.977753	-93.2650108
+70	University of Wisconsin - Madison	Madison	WI	"3,381"	2005	43.0730517	-89.4012302
+71	Michigan State University	East Lansing	MI	"3,293"	2005	42.7369792	-84.4838654
+72	Stanford University	Stanford	CA	"3,200"	2005	37.4274745	-122.169719
+73	Penn State University - University Park	University Park	PA	"3,199"	2005	32.8550377	-96.797592
+74	University of Arizona	Tucson	AZ	"3,023"	2005	32.2217429	-110.926479
+75	University of Southern California	Los Angeles	CA	"7,482"	2008	34.0522342	-118.2436849
+76	New York University	New York	NY	"6,761"	2008	40.7127753	-74.0059728
+77	Columbia University	New York	NY	"6,685"	2008	40.7127753	-74.0059728
+78	University of Illinois - Urbana-Champaign	Champaign	IL	"6,570"	2008	40.1164204	-88.2433829
+79	Purdue University - Main Campus	West Lafayette	IN	"6,136"	2008	40.4258686	-86.9080655
+80	University of Michigan - Ann Arbor	Ann Arbor	MI	"5,790"	2008	42.2808256	-83.7430378
+81	University of Texas - Austin	Austin	TX	"5,703"	2008	30.267153	-97.7430608
+82	University of California - Los Angeles	Los Angeles	CA	"5,590"	2008	34.0522342	-118.2436849
+83	Boston University	Boston	MA	"5,037"	2008	42.3600825	-71.0588801
+84	Michigan State University	East Lansing	MI	"4,757"	2008	42.7369792	-84.4838654
+85	Harvard University	Cambridge	MA	"4,735"	2008	52.205337	0.121817
+86	University of Florida	Gainesville	FL	"4,731"	2008	29.6516344	-82.3248262
+87	University of Pennsylvania	Philadelphia	PA	"4,635"	2008	39.9525839	-75.1652215
+88	Ohio State University - Main Campus	Columbus	OH	"4,583"	2008	39.9611755	-82.9987942
+89	Indiana University - Bloomington	Bloomington	IN	"4,565"	2008	39.165325	-86.5263857
+90	Texas A&M University	College Station	TX	"4,558"	2008	30.627977	-96.3344068
+91	SUNY University at Buffalo	Buffalo	NY	"4,539"	2008	42.8864468	-78.8783689
+92	Arizona State University - Tempe Campus	Tempe	AZ	"4,375"	2008	33.4255104	-111.9400054
+93	University of Wisconsin - Madison	Madison	WI	"4,243"	2008	43.0730517	-89.4012302
+94	University of Minnesota - Twin Cities	Minneapolis	MN	"4,120"	2008	44.977753	-93.2650108
+95	Cornell University	Ithaca	NY	"4,018"	2008	42.4439614	-76.5018807
+96	Stanford University	Stanford	CA	"3,976"	2008	37.4274745	-122.169719
+97	Georgia Institute of Technology	Atlanta	GA	"3,911"	2008	33.7489954	-84.3879824
+98	University of Houston	Houston	TX	"3,778"	2008	29.7604267	-95.3698028
+99	Penn State University - University Park	University Park	PA	"3,741"	2008	32.8550377	-96.797592
+100	University of Southern California	Los Angeles	CA	"8,615"	2010	34.0522342	-118.2436849
+101	University of Illinois - Urbana-Champaign	Champaign	IL	"7,991"	2010	40.1164204	-88.2433829
+102	New York University	New York	NY	"7,988"	2010	40.7127753	-74.0059728
+103	Purdue University - Main Campus	West Lafayette	IN	"7,562"	2010	40.4258686	-86.9080655
+104	Columbia University	New York	NY	"7,297"	2010	40.7127753	-74.0059728
+105	University of California - Los Angeles	Los Angeles	CA	"6,249"	2010	34.0522342	-118.2436849
+106	Ohio State University - Main Campus	Columbus	OH	"6,082"	2010	39.9611755	-82.9987942
+107	University of Michigan - Ann Arbor	Ann Arbor	MI	"5,995"	2010	42.2808256	-83.7430378
+108	Michigan State University	East Lansing	MI	"5,748"	2010	42.7369792	-84.4838654
+109	Harvard University	Cambridge	MA	"5,594"	2010	52.205337	0.121817
+110	Indiana University - Bloomington	Bloomington	IN	"5,471"	2010	39.165325	-86.5263857
+111	Boston University	Boston	MA	"5,464"	2010	42.3600825	-71.0588801
+112	University of Florida	Gainesville	FL	"5,393"	2010	29.6516344	-82.3248262
+113	University of Texas - Austin	Austin	TX	"5,323"	2010	30.267153	-97.7430608
+114	Penn State University - University Park	University Park	PA	"5,207"	2010	32.8550377	-96.797592
+115	Northeastern University	Boston	MA	"5,187"	2010	42.3600825	-71.0588801
+116	SUNY University at Buffalo	Buffalo	NY	"5,185"	2010	42.8864468	-78.8783689
+117	University of Minnesota - Twin Cities	Minneapolis	MN	"5,124"	2010	44.977753	-93.2650108
+118	Georgia Institute of Technology	Atlanta	GA	"4,943"	2010	33.7489954	-84.3879824
+119	Arizona State University	Tempe	AZ	"4,934"	2010	33.4255104	-111.9400054
+120	Texas A&M University	College Station	TX	"4,874"	2010	30.627977	-96.3344068
+121	University of Pennsylvania	Philadelphia	PA	"4,752"	2010	39.9525839	-75.1652215
+122	University of Wisconsin - Madison	Madison	WI	"4,647"	2010	43.0730517	-89.4012302
+123	University of Houston	Houston	TX	"4,377"	2010	29.7604267	-95.3698028
+124	Cornell University	Ithaca	NY	"4,357"	2010	42.4439614	-76.5018807
+125	New York University	New York	NY	"9,362"	2013	40.7127753	-74.0059728
+126	University of Southern California	Los Angeles	CA	"9,840"	2013	34.0522342	-118.2436849
+127	University of Illinois - Urbana-Champaign	Champaign	IL	"9,804"	2013	40.1164204	-88.2433829
+128	Columbia University	New York	NY	"8,797"	2013	40.7127753	-74.0059728
+129	Purdue University - Main Campus	West Lafayette	IN	"9,509"	2013	40.4258686	-86.9080655
+130	University of California - Los Angeles	Los Angeles	CA	"8,424"	2013	34.0522342	-118.2436849
+131	Northeastern University	Boston	MA	"7,705"	2013	42.3600825	-71.0588801
+132	Arizona State University	Tempe	AZ	"6,645"	2013	33.4255104	-111.9400054
+133	Michigan State University	East Lansing	MI	"6,759"	2013	42.7369792	-84.4838654
+134	University of Washington	Seattle	WA	"6,491"	2013	47.6062095	-122.3320708
+135	University of Michigan - Ann Arbor	Ann Arbor	MI	"6,827"	2013	42.2808256	-83.7430378
+136	Boston University	Boston	MA	"6,615"	2013	42.3600825	-71.0588801
+137	Penn State University - University Park	University Park	PA	"6,693"	2013	32.8550377	-96.797592
+138	Ohio State University - Main Campus	Columbus	OH	"6,478"	2013	39.9611755	-82.9987942
+139	Indiana University - Bloomington	Bloomington	IN	"6,547"	2013	39.165325	-86.5263857
+140	University of Minnesota - Twin Cities	Minneapolis	MN	"6,178"	2013	44.977753	-93.2650108
+141	SUNY University at Buffalo	Buffalo	NY	"5,804"	2013	42.8864468	-78.8783689
+142	University of California - Berkeley	Berkeley	CA	"5,632"	2013	37.8718992	-122.2585399
+143	University of Texas - Dallas	Richardson	TX	"5,193"	2013	32.9483335	-96.7298519
+144	University of Florida	Gainesville	FL	"5,961"	2013	29.6516344	-82.3248262
+145	University of Pennsylvania	Philadelphia	PA	"5,751"	2013	39.9525839	-75.1652215
+146	University of Wisconsin - Madison	Madison	WI	"5,291"	2013	43.0730517	-89.4012302
+147	University of Texas - Austin	Austin	TX	"5,481"	2013	30.267153	-97.7430608
+148	Texas A&M University	College Station	TX	"5,149"	2013	30.627977	-96.3344068
+149	Carnegie Mellon University	Pittsburgh	PA	"4,744"	2013	40.4406248	-79.9958864
+>>>>>>> a4b94c1252cdaeb827db7de075c7a7db972ccc57
