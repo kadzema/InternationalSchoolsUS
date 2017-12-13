@@ -4,6 +4,10 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, inspect, func, desc, extract, select, Table
+<<<<<<< HEAD
+=======
+from collections import defaultdict
+>>>>>>> 9ca7294936d9da28b5681a9738acd9bbbbd251e1
 # from dateutil.relativedelta import relativedelta
         
 
@@ -183,6 +187,7 @@ def countySelect(countyName):
     Base = automap_base()
     Base.prepare(engine, reflect=True)
     session = Session(engine)
+<<<<<<< HEAD
 
     aian = Base.classes.census_aian
     asian = Base.classes.census_asian
@@ -216,6 +221,79 @@ def countySelect(countyName):
     return jsonify(censusDict)
     # return "test"
 
+=======
+
+    aian = Base.classes.census_aian
+    asian = Base.classes.census_asian
+    black = Base.classes.census_black
+    hispanic = Base.classes.census_hispanic
+    mixed = Base.classes.census_mixed
+    other = Base.classes.census_other
+    whites = Base.classes.census_whites
+
+    # the queries
+    aianTotals = session.query(aian.CountyName, aian.TotalPopulation, aian.Over149999, aian.Over200000,aian.Year, aian.Race).filter_by(CountyName=countyName).order_by(aian.CountyName).all()
+    asianTotals = session.query(asian.CountyName, asian.TotalPopulation, asian.Over150000, asian.Over200000,asian.Year, asian.Race).filter_by(CountyName=countyName).filter_by(Race='Asian').order_by(asian.CountyName).all()
+    blackTotals = session.query(black.CountyName, black.TotalPopulation, black.Over150000, black.Over200000,black.Year, black.Race).filter_by(CountyName=countyName).order_by(black.CountyName).all()
+    hispanicTotals = session.query(hispanic.CountyName, hispanic.TotalPopulation, hispanic.Over150000, hispanic.Over200000,hispanic.Year, hispanic.Race).filter_by(CountyName=countyName).order_by(hispanic.CountyName).all()
+    mixedTotals = session.query(mixed.CountyName, mixed.TotalPopulation, mixed.Over150000, mixed.Over200000,mixed.Year, mixed.Race).filter_by(CountyName=countyName).order_by(mixed.CountyName).all()
+    otherTotals = session.query(other.CountyName, other.TotalPopulation, other.Over150000, other.Over200000,other.Year, other.Race).filter_by(CountyName=countyName).order_by(other.CountyName).all()
+    whitesTotals = session.query(whites.CountyName, whites.TotalPopulation, whites.Over150000, whites.Over200000,whites.Year, whites.Race).filter_by(CountyName=countyName).order_by(whites.CountyName).all()
+
+
+    # clear out the object so we don't keep adding to it everytime we refresh
+    censusDict.clear()
+
+    dataToObject(aianTotals,"AIAN")
+    dataToObject(blackTotals,"BLACK")
+    dataToObject(asianTotals,"ASIAN")
+    dataToObject(hispanicTotals,"HISPANIC")
+    dataToObject(mixedTotals,"MIXED")
+    dataToObject(otherTotals,"OTHER")
+    dataToObject(whitesTotals,"WHITES")
+
+    return jsonify(censusDict)
+    # return "test"
+
+@app.route("/origin")
+def origin():
+    engine = create_engine("sqlite:///iie.sqlite", echo=False)
+    Base = automap_base()
+    Base.prepare(engine, reflect=True)
+    session = Session(engine)
+
+    origin = Base.classes.origin
+
+    originResult = session.query(origin.Origin, origin.studentcount, origin.year).all()
+
+    e = defaultdict(list)
+    for element in originResult:
+        e["origins"].append({'origin': str(element[0]), 'studentcount': element[1], 'year': element[2]})
+
+    return jsonify(e)
+
+
+@app.route("/univCounty")
+def univCounty():
+    print("yes")
+    engine = create_engine("sqlite:///iie.sqlite", echo=False)
+    Base = automap_base()
+    Base.prepare(engine, reflect=True)
+    session = Session(engine)
+
+    univ = Base.classes.university_county
+
+    univResult = session.query(univ.PlaceofDestination, univ.City, univ.State, univ.Students, univ.Year, univ.County).all()
+
+    print(univResult)
+
+
+    e = defaultdict(list)
+    for element in univResult:
+        e["universities"].append({'university': str(element[0]), 'city': element[1], 'state': element[2], 'students': element[3], 'year': element[4], 'county':element[5]})
+
+    return jsonify(e)
+>>>>>>> 9ca7294936d9da28b5681a9738acd9bbbbd251e1
 
 
 

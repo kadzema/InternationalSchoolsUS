@@ -527,4 +527,160 @@ d3.json("../test2/"+countyName, function(err,data){
       .attr("data-axis-name", "year")
       .text("Year");
 
+<<<<<<< HEAD
 });
+=======
+});
+
+// the origins chart-----------------------------------------------------------------------------------------------
+var originSvg = dimple.newSvg(".originChart", 690, 400);
+d3.json("/origin", function (data) {
+  // Latest period only
+  // var filteredData = dimple.filterData(data, "Date", "01/12/2012");
+
+  console.log("data",data.origins[0]);
+
+
+  // Create the chart
+  var myChart = new dimple.chart(originSvg, data.origins);
+  myChart.setBounds(60, 30, 510, 330)
+
+  // Create a standard bubble of studentCount by year
+  // We are coloring by Origin as that will be the key in the legend
+  x = myChart.addTimeAxis("x", "year", "%Y", "%Y");
+  y = myChart.addMeasureAxis("y", "studentcount");
+  myChart.addSeries(["year","origin"], dimple.plot.bubble);
+  // myChart.addSeries("origin", dimple.plot.line);
+  var myLegend = myChart.addLegend(630, 45, 75, 300, "Right");
+  myChart.draw();
+
+  // This is a critical step.  By doing this we orphan the legend. This
+  // means it will not respond to graph updates.  Without this the legend
+  // will redraw when the chart refreshes removing the unchecked item and
+  // also dropping the events we define below.
+  myChart.legends = [];
+
+  // This block simply adds the legend title. I put it into a d3 data
+  // object to split it onto 2 lines.  This technique works with any
+  // number of lines, it isn't dimple specific.
+  originSvg.selectAll("title_text")
+    .data(["Click legend to","show/hide origins:"])
+    .enter()
+    .append("text")
+      .attr("x", 585)
+      .attr("y", function (d, i) { return 40 + i * 14; })
+      .style("font-family", "sans-serif")
+      .style("font-size", "10px")
+      .style("color", "Black")
+      .text(function (d) { return d; });
+
+  // Get a unique list of Owner values to use when filtering
+  var filterValues = dimple.getUniqueValues(data.origins, "origin");
+  // Get all the rectangles from our now orphaned legend
+  myLegend.shapes.selectAll("rect")
+    // Add a click event to each rectangle
+    .on("click", function (e) {
+      // This indicates whether the item is already visible or not
+      var hide = false;
+      var newFilters = [];
+      // If the filters contain the clicked shape hide it
+      filterValues.forEach(function (f) {
+        if (f === e.aggField.slice(-1)[0]) {
+          hide = true;
+        } else {
+          newFilters.push(f);
+        }
+      });
+      // Hide the shape or show it
+      if (hide) {
+        d3.select(this).style("opacity", 0.2);
+      } else {
+        newFilters.push(e.aggField.slice(-1)[0]);
+        d3.select(this).style("opacity", 0.8);
+      }
+      // Update the filters
+      filterValues = newFilters;
+      // Filter the data
+      myChart.data = dimple.filterData(data.origins, "origin", filterValues);
+      // Passing a duration parameter makes the chart animate. Without
+      // it there is no transition
+      myChart.draw(800);
+    });
+});
+
+// the unviersity chart------------------------------------------------------------------------------------------------
+var univSvg = dimple.newSvg(".universityCounty", 690, 400);
+d3.json("/univCounty", function (data) {
+  // Latest period only
+  // var filteredData = dimple.filterData(data, "Date", "01/12/2012");
+
+  console.log("data",data.universities[0]);
+
+
+  // Create the chart
+  var myChart = new dimple.chart(univSvg, data.universities);
+  myChart.setBounds(60, 30, 510, 330)
+
+  // Create a standard bubble of studentCount by year
+  // We are coloring by county as that will be the key in the legend
+  x = myChart.addTimeAxis("x", "year", "%Y", "%Y");
+  y = myChart.addMeasureAxis("y", "students");
+  myChart.addSeries(["year","university", "county"], dimple.plot.bubble);
+  var myLegend = myChart.addLegend(620, 45, 155, 400, "Right");
+  myChart.draw();
+
+  // This is a critical step.  By doing this we orphan the legend. This
+  // means it will not respond to graph updates.  Without this the legend
+  // will redraw when the chart refreshes removing the unchecked item and
+  // also dropping the events we define below.
+  myChart.legends = [];
+
+  // This block simply adds the legend title. I put it into a d3 data
+  // object to split it onto 2 lines.  This technique works with any
+  // number of lines, it isn't dimple specific.
+  univSvg.selectAll("title_text")
+    .data(["Click legend to","show/hide counties:"])
+    .enter()
+    .append("text")
+      .attr("x", 585)
+      .attr("y", function (d, i) { return 40 + i * 14; })
+      .style("font-family", "sans-serif")
+      .style("font-size", "10px")
+      .style("color", "Black")
+      .text(function (d) { return d; });
+
+  // Get a unique list of Owner values to use when filtering
+  var filterValues = dimple.getUniqueValues(data.universities, "county");
+  // Get all the rectangles from our now orphaned legend
+  myLegend.shapes.selectAll("rect")
+    // Add a click event to each rectangle
+    .on("click", function (e) {
+      // This indicates whether the item is already visible or not
+      var hide = false;
+      var newFilters = [];
+      // If the filters contain the clicked shape hide it
+      filterValues.forEach(function (f) {
+        if (f === e.aggField.slice(-1)[0]) {
+          hide = true;
+        } else {
+          newFilters.push(f);
+        }
+      });
+      // Hide the shape or show it
+      if (hide) {
+        d3.select(this).style("opacity", 0.2);
+      } else {
+        newFilters.push(e.aggField.slice(-1)[0]);
+        d3.select(this).style("opacity", 0.8);
+      }
+      // Update the filters
+      filterValues = newFilters;
+      // Filter the data
+      myChart.data = dimple.filterData(data.universities, "county", filterValues);
+      // Passing a duration parameter makes the chart animate. Without
+      // it there is no transition
+      myChart.draw(800);
+    });
+});
+
+>>>>>>> 9ca7294936d9da28b5681a9738acd9bbbbd251e1
