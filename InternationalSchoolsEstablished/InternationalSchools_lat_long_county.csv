@@ -1,4 +1,4 @@
-City,Name,State,EstablishedYear,Lat,Lng,County
+ï»¿City,Name,State,EstablishedYear,Lat,Lng,County
  Scottsdale,International School of Arizona,Arizona,1997,33.4941704,-111.9260519,Maricopa County
  Irvine,Alliant International University,California,2001,33.6845673,-117.8265049,Orange County
  Los Angeles,American University Preparatory School,California,2013,34.0522342,-118.2436849,Los Angeles County
@@ -7,8 +7,8 @@ City,Name,State,EstablishedYear,Lat,Lng,County
 San Francisco,International High School of San Francisco,California,1962,37.7749295,-122.4194155,San Francisco County
  San Francisco,International School of the Peninsula,California,1979,37.7749295,-122.4194155,San Francisco County
  San Francisco,La Scuola International School,California,2002,37.7749295,-122.4194155,San Francisco County
-LosAngels,Lycée Français de Los Angeles,California,1964,34.0522342,-118.2436849,Los Angeles County
- Burbank,Lycée International de Los Angeles,California,1978,34.1808392,-118.3089661,Los Angeles County
+LosAngels,LycÃ©e FranÃ§ais de Los Angeles,California,1964,34.0522342,-118.2436849,Los Angeles County
+ Burbank,LycÃ©e International de Los Angeles,California,1978,34.1808392,-118.3089661,Los Angeles County
 Oakland,Oakland International High School,California,2007,37.8043637,-122.2711137,Alameda County
 Denver,International School of Denver,Colorado,1858,39.7392358,-104.990251,Denver County
  Riverside,The International School at Dundee,Connecticut,2000,41.0337666,-73.5784843,Fairfield County
@@ -22,13 +22,13 @@ Lighthouse Point,North Broward Preparatory School,Florida,1957,26.275636,-80.087
 Lake Butler,Windermere Preparatory School,Florida,2000,30.0227391,-82.3395574,Union County
 Atlanta,Atlanta International School,Georgia,1984,33.7489954,-84.3879824,Fulton County
  Peachtree Corners,Seigakuin Atlanta International School,Georgia,1990,33.969864,-84.2212938,Gwinnett County
- Honolulu,Varsity International School,Hawaii,NAN,21.3069444,-157.8583333,Honolulu County
+ Honolulu,Varsity International School,Hawaii,,21.3069444,-157.8583333,Honolulu County
 Chicago,British International School of Chicago Lincoln Park,Illinois,2001,41.8781136,-87.6297982,Cook County
  South Loop,"British International School of Chicago, South Loop",Illinois,2001,41.8565453,-87.6271838,Cook County
  Arlington Heights,Chicago Futabakai Japanese School,Illinois,1966,42.0883603,-87.9806265,Cook County
-Chicago,Lycée Français de Chicago,Illinois,1995,41.8781136,-87.6297982,Cook County
+Chicago,LycÃ©e FranÃ§ais de Chicago,Illinois,1995,41.8781136,-87.6297982,Cook County
  Indianapolis,International School of Indiana,Indiana,1994,39.768403,-86.158068,Marion County
- Bethesda,Lycée Rochambeau,Maryland,1955,38.984652,-77.0947092,Montgomery County
+ Bethesda,LycÃ©e Rochambeau,Maryland,1955,38.984652,-77.0947092,Montgomery County
  Fort Washington,Maryland International Day School,Maryland,2001,38.7073379,-77.0230313,Prince George's County
 Boston,British International School of Boston,Massachusetts,2000,42.3600825,-71.0588801,Suffolk County
  Cambridge,International School of Boston,Massachusetts,1962,42.3736158,-71.1097335,Middlesex County
@@ -40,7 +40,7 @@ Boston,British International School of Boston,Massachusetts,2000,42.3600825,-71.
  Henderson,Henderson International School,Nevada,1941,36.0395247,-114.9817213,Clark County
  Oakland,The New Jersey Japanese School,New Jersey,1992,41.0131529,-74.2643143,Bergen County
  Princeton,Princeton International School of Mathematics and Science,New Jersey,2013,40.3572976,-74.6672226,Mercer County
- Morristown,French Saturday School,New Jersey,NAN,40.7967667,-74.4815438,Morris County
+ Morristown,French Saturday School,New Jersey,,40.7967667,-74.4815438,Morris County
  Montezuma,Armand Hammer United World College of the American West,New Mexico,1982,35.6521842,-105.2766154,San Miguel County
  New York City,Avenues: The World School,New York,2011,40.7127753,-74.0059728,New York
 New York City,British International School of New York,New York,2006,40.7127753,-74.0059728,New York
@@ -52,7 +52,7 @@ New York City,EF International Academy,New York,2004,40.7127753,-74.0059728,New 
  White Plains,German International School New York,New York,1980,41.0339862,-73.7629097,Westchester County
  New York City,The International High School,New York,1985,40.7127753,-74.0059728,New York
  Purchase,Keio Academy of New York,New York,1990,41.0400135,-73.7144477,Westchester County
- New York City,Lycée Français de New York,New York,1935,40.7127753,-74.0059728,New York
+ New York City,LycÃ©e FranÃ§ais de New York,New York,1935,40.7127753,-74.0059728,New York
  New York City,Nord Anglia International School New York,New York,2011,40.7127753,-74.0059728,New York
  New York City,United Nations International School,New York,1947,40.7127753,-74.0059728,New York
  Greensboro,American Hebrew Academy,North Carolina,2001,36.0726354,-79.7919754,Guilford County
