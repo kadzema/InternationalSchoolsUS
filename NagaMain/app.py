@@ -125,7 +125,7 @@ def students(year):
     Base = automap_base()
     Base.prepare(engine, reflect=True)
     session = Session(engine)
-    UniversityStats = Base.classes.UniversityStats
+    UniversityStats = Base.classes.university_stats
     all_students=session.query(UniversityStats.Place,UniversityStats.StudentsCount,UniversityStats.Lng,UniversityStats.Lat,UniversityStats.Year).filter(UniversityStats.Year==year).all()
     student_list = []
     for s in all_students:
@@ -146,7 +146,7 @@ def states(year):
     Base.prepare(engine, reflect=True)
     session = Session(engine)
 
-    UniversityStats = Base.classes.UniversityStats  
+    UniversityStats = Base.classes.university_stats  
     all_states = session.query(UniversityStats.State, func.count(UniversityStats.State)).filter(UniversityStats.Year==year).group_by(UniversityStats.State).all()
     state_list=[]
     for state  in all_states:
