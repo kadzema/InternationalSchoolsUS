@@ -4,12 +4,45 @@
 <meta charset="utf-8">
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <link rel="stylesheet" href="style.css">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+<script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
 </style>
+<script type="text/javascript" src="app1.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var valMap = [2000,2005,2008,2010,2013,2016];
+    $( "#slider-range-min" ).slider({
+      range: "min",
+      value: 0,
+      min: 0,
+      max: valMap.length-1,
+      slide: function( event, ui ) {
+        $( "#year" ).val(valMap[ui.value]);
+        GenerateGraph($( "#year" ).val());
+      }
+    });
+    $( "#year" ).val( valMap[$( "#slider-range-min" ).slider( "value" )] );
+    GenerateGraph($( "#year" ).val());
+  } );
+  </script>
 </head>
 <body>
- <script type="text/javascript" src="app.js"></script>
 
 
+<div id="chart"></div>
+
+ 
+ 
+<p>
+  <label for="year">Year:</label>
+  <input type="text" id="year" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+<div id="slider-range-min" style="width:200px"></div>
 
 </body>
 </html>
