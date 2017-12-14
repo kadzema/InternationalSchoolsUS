@@ -37,32 +37,11 @@
   <!-- Custom scripts for this template -->
   <script src="../static/js/stylish-portfolio.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body id="page-top">
-
-  <!-- Navigation -->
-    <a class="menu-toggle rounded" href="#">
-      <i class="fa fa-bars"></i>
-    </a>
-    <nav id="sidebar-wrapper">
-      <ul class="sidebar-nav">
-        <li class="sidebar-brand">
-          <a class="js-scroll-trigger" href="#page-top">Home</a>
-        </li>
-
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#about">About Us</a>
-        </li>  
-
-        <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#graphs">Analysis</a>
-        </li>
-
-      </ul>
-    </nav>
 
     <!-- Header -->
     <header class="masthead d-flex">
@@ -95,7 +74,7 @@
               </span>
               <h4><strong>Kristine Adzema</strong></h4> 
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
               <span class="service-icon mx-auto mb-3">
                 <img class="img-fluid" style="border:5px solid #ffffff" src="../static/img/naga.jpg" alt="Naga">
               </span>
@@ -115,7 +94,7 @@
     </div>
   </section>
 <!-- Graphs Placeholder -->
-  <section class="content-section bg-secondary text-center" id="graphs">
+   <section class="content-section bg-secondary text-center" id="graphs">
     <div class="container">
       <!-- <div class="content-section-heading"> -->
       <h2 class="mb-5">Data Analysis</h2>
@@ -128,18 +107,21 @@
     <div class="over200Percentage"></div>
     <div class="originChart"></div>
     <div class="universityCounty"></div>
-
     <div class="heatmap">
-      <div id="chart"></div>
-      <div style="width:300px">
-        <div>
-          <label for="year">Year: <span id="year"></span> </label>
-          <!--<input type="text" id="year" readonly style="border:0; color:#f6931f; font-weight:bold;"> -->
-        </div>
-        <div id="slider-range-min" style="width:200px"></div>
-      </div>
+  <div id="chart"></div>
+  <div style="width:300px">
+    <div>
+      <label for="year">Year: <span id="year"></span> </label>
+      <!--<input type="text" id="year" readonly style="border:0; color:#f6931f; font-weight:bold;"> -->
+    </div>
+    <div id="slider-range-min" style="width:200px"></div>
+  </div>
+</div>
+
+
     </div>
   </section>
+
 
 <!-- Footer -->
 <footer class="footer text-center">
@@ -154,10 +136,9 @@
   <i class="fa fa-angle-up"></i>
 </a>
 
-  </script>
-
 
 <script type="text/javascript" src="../static/app.js"></script>
 <script type="text/javascript" src="../static/js/app-choropleth.js"></script>
+
 </body>
 </html>
