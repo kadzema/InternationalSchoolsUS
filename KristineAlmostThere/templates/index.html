@@ -22,11 +22,11 @@
   <!-- Custom CSS -->
   
 
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
   
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-  <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
+  <script src="../static/js/dimple.v2.3.0.min.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script src="../static/vendor/jquery/jquery.min.js"></script>
   <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -168,12 +168,14 @@
       <div class="heatmap">
 
     <div id="chart"></div>
-  <div style="width:300px">
+  <div style="width:300px;padding-bottom:10px">
     <div>
-      <label for="year">Year: <span id="year"></span> </label>
-      <!--<input type="text" id="year" readonly style="border:0; color:#f6931f; font-weight:bold;"> -->
+      <div style="margin-left:30px">
+        <label for="year" >Year: <span id="year"></span> </label>
+        <!--<input type="text" id="year" readonly style="border:0; color:#f6931f; font-weight:bold;"> -->
+      </div>
+      <div id="slider-range-min" style="width:200px;margin:30px"></div>
     </div>
-    <div id="slider-range-min" style="width:200px"></div>
   </div>
 
 </div>

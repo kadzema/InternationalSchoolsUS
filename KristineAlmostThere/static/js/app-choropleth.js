@@ -1,11 +1,16 @@
 $( function() {
     var valMap = [2000,2005,2008,2010,2013,2016];
     $( "#slider-range-min" ).slider({
-      range: "min",
+	  range: "min",
+	  orientation: "horizontal",
       value: 0,
-      min: 0,
-      max: valMap.length-1,
+	  min: 0,
+	  step:1,
+	  max: valMap.length-1,
+	  animate: false,
       slide: function( event, ui ) {
+		console.log(ui.value);
+		//alert(valMap[ui.value]);
         $( "#year" ).text(valMap[ui.value]);
         GenerateGraph($( "#year" ).text());
       }
@@ -41,13 +46,21 @@ function GenerateGraph(year)
 	var svg = d3.select("#chart")
 				.append("svg")
 				.attr("width", width)
-				.attr("height", height);
-			
+				.attr("height", height)
+				
+			    
 	// Append Div for tooltip to SVG
-	var div = d3.select("body")
+	var div = d3.select("#chart")
 				.append("div")   
-				.attr("class", "tooltip")               
+				.attr("class", "tooltip svg-map-university")               
 				.style("opacity", 0);
+	
+	// Append Div for tooltip to SVG
+	var stateTooltipDiv = d3.select("#chart")
+	.append("div")   
+	.attr("class", "tooltip svg-map-state")               
+	.style("opacity", 0)
+				
 
 	// Load in my states data!
 	var sample_url="/state-universities/"+year;
@@ -105,7 +118,24 @@ function GenerateGraph(year)
 		//If value is undefined…
 		return "rgb(211,211,211)";
 		}
-	});
+	})
+	.on("mouseover", function(d) {      
+		stateTooltipDiv.transition()        
+		.duration(100)      
+		.style("opacity", .9);      
+		stateTooltipDiv.text(d.properties.name+" ("+d.properties.Count+")")
+		.style("left", (d3.event.pageX) + "px")     
+		.style("top", (d3.event.pageY) + "px");    
+	})
+
+
+// function(d){tooltip.text(d); return tooltip.style("visibility", "visible");})
+	// fade out tooltip on mouse out               
+	.on("mouseout", function(d) {       
+		stateTooltipDiv.transition()        
+		.duration(500)      
+		.style("opacity", 0);   
+	});;
 
 			
 	// Map the studenst  in universities!
@@ -117,7 +147,7 @@ function GenerateGraph(year)
 		.enter()
 		.append("circle")
 		.attr("cx", function(d) {
-			console.log(d);
+		//	console.log(d);
 			return projection([d.Lng, d.Lat])[0];
 		})
 		.attr("cy", function(d) {
@@ -132,9 +162,9 @@ function GenerateGraph(year)
 			
 		.on("mouseover", function(d) {      
 			div.transition()        
-			.duration(0)      
+			.duration(100)      
 			.style("opacity", .9);      
-			div.text(d.Place+"-"+(d.StudentsCount))
+			div.text(d.Place+" ("+d.StudentsCount+")")
 			.style("left", (d3.event.pageX) + "px")     
 			.style("top", (d3.event.pageY) + "px");    
 		})
@@ -148,7 +178,17 @@ function GenerateGraph(year)
 			.style("opacity", 0);   
 		});
 	
-	});      
+	});     
+	
+	  //add a title
+	  svg.append("text")
+	  .attr("x", 445)             
+	  .attr("y", 20)
+	  .attr("text-anchor", "middle")  
+	  .style("font-size", "16px") 
+	  .style("text-decoration", "underline")  
+	  .text("International Universities by State - Analysis");
+
 	// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
 	var legend = d3.select("#chart").append("svg")
 					.attr("class", "legend")

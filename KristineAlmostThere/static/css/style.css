@@ -327,7 +327,15 @@ margin: 1px;
   border: 0;
   border-radius: 10px;
 }
+.svg-map-university{
+  background: #377eb8;
+  opacity: 0.2;
 
+}
+.svg-map-state{
+  background: rgb(213,22,17);
+  opacity: 0.2;
+}
 .axis-text {
   font-family: sans-serif;
   font-weight: bold;
