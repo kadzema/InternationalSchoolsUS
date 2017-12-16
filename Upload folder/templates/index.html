@@ -106,31 +106,13 @@
 
         </div>
 
-<div class="container">
-      <div class="heatmap">
-
-    <div id="chart"></div>
-  <div style="width:300px;padding-bottom:10px">
-    <div>
-      <div style="margin-left:30px">
-        <label for="year" >Year: <span id="year"></span> </label>
-        <!--<input type="text" id="year" readonly style="border:0; color:#f6931f; font-weight:bold;"> -->
-      </div>
-      <div id="slider-range-min" style="width:200px;margin:30px"></div>
-    </div>
-  </div>
-
-</div>
-
-</div>
-
       
 
 <!-- all the reports goes in below section -->
 <div class="container-flow">
   <div class="row">
     <div class="col-md-12" align="center">
-        <h3 class="mb-5">Trends in Racial Composition By County</h3>
+        <h3 class="mb-5">Trends in Minority Composition By County</h3>
         <select id="selCounty" onchange="changeCounty(this.value)">
           <option value="Los Angeles County, California">Los Angeles County, California</option>
           <option value="Santa Clara County, California">Santa Clara County California</option>
@@ -161,7 +143,7 @@
           <div class="over200Percentage" align="center"></div>
       </div>
   </div>
-<!--   <div class="row">
+  <div class="row">
       <div class="col-md-6" align="center">
           <div class="originChart" align="center"></div>
       </div>
@@ -169,8 +151,8 @@
           <!-- <h4 class="mb-5">US University Destinations by county/city</h4> -->
           <div class="universityCounty" align="center"></div>
       </div>
-  </div> 
- <!--  <div class="row">
+  </div>
+  <div class="row">
       <div class="col-md-6" align="center">
           <div class="universityRanking" align="center"></div>
       </div>
@@ -178,9 +160,26 @@
           <!-- <h4 class="mb-5">US University Destinations by county/city</h4> -->
           <div class="K12Scores" align="center"></div>
       </div>
-  </div> 
+  </div>
   
 </div>
+
+<div class="container">
+      <div class="heatmap">
+
+    <div id="chart"></div>
+  <div style="width:300px;padding-bottom:10px">
+    <div>
+      <div style="margin-left:30px">
+        <label for="year" >Year: <span id="year"></span> </label>
+        <!--<input type="text" id="year" readonly style="border:0; color:#f6931f; font-weight:bold;"> -->
+      </div>
+      <div id="slider-range-min" style="width:200px;margin:30px"></div>
+    </div>
+  </div>
+
+</div>
+
 
 
 </section>
