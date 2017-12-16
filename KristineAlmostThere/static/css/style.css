@@ -296,7 +296,21 @@ margin: 1px;
 #graphs{
 
  background-color: #eef0f1;
+ 
 }
+
+#header{
+
+background-color: #eef0f2;
+
+}
+
+#data{
+
+  padding-top: 10px;
+
+}
+
 
 .chart::before {
   position: absolute;
